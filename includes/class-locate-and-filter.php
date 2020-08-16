@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @subpackage Locate_And_Filter/includes
  * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_And_Filter
+class Locate_And_Filter_Pro
 {
     
     /**

@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-locate-and-filter-activator.php
  */
-function activate_locate_and_filter() {
+function activate_locate_and_filter_pro() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-activator.php';
 	Locate_And_Filter_Activator::activate();
 }
@@ -44,13 +44,13 @@ function activate_locate_and_filter() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-locate-and-filter-deactivator.php
  */
-function deactivate_locate_and_filter() {
+function deactivate_locate_and_filter_pro() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-deactivator.php';
 	Locate_And_Filter_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_locate_and_filter' );
-register_deactivation_hook( __FILE__, 'deactivate_locate_and_filter' );
+register_activation_hook( __FILE__, 'activate_locate_and_filter_pro' );
+register_deactivation_hook( __FILE__, 'deactivate_locate_and_filter_pro' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -67,10 +67,20 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
  *
  * @since    1.0.0
  */
-function run_locate_and_filter() {
+function run_locate_and_filter_pro() {
 
-	$plugin = new Locate_And_Filter();
-	$plugin->run();
+	if ( ! function_exists( 'is_plugin_active' ) ) {
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	}
+
+	if ( ! is_plugin_active( 'locateandfilter/locateandfilter.php' ) ) {
+		$plugin = new Locate_And_Filter_Pro();
+		$plugin -> run();
+	} else {
+		deactivate_plugins('locateandfilter/locateandfilter.php');
+	}
 
 }
-run_locate_and_filter();
+
+
+run_locate_and_filter_pro();
