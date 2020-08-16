@@ -90,31 +90,31 @@ class Locate_And_Filter_Pro
     {
 
         /* Load default layouts */
-        $layouts = [(object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-left.php', 'name' => 'Default Layout left'], (object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-right.php', 'name' => 'Default Layout right'], (object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-project.php', 'name' => 'Layout for projects']];
+        $layouts = [(object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-left.php', 'name' => 'Default Layout left'], (object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-right.php', 'name' => 'Default Layout right'], (object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-project.php', 'name' => 'Layout for projects']];
         Locate_And_Filter_Addon_Helper::add_map_layouts('basic', $layouts);
 
         /* Load default marker icons */
-        $markers = [(object) ['url' => plugin_dir_url(dirname(__FILE__)) . 'public/js/leaflet-0.7.3/images/marker-icon.png', 'description' => '', 'width' => 25, 'height' => 41, 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'public/js/leaflet-0.7.3/images/marker-shadow.png', 'shadowWidth' => '25', 'shadowHeight' => '41'],
+        $markers = [(object) ['url' => plugin_dir_url(dirname(__FILE__)).'public/js/leaflet-0.7.3/images/marker-icon.png', 'description' => '', 'width' => 25, 'height' => 41, 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'public/js/leaflet-0.7.3/images/marker-shadow.png', 'shadowWidth' => '25', 'shadowHeight' => '41'],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-8.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-8.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-7.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-7.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-9.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-9.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-6.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-6.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-3.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-3.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-13.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-13.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-4.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-4.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-10.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-10.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-12.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-12.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
             (object) [
-                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-5.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48']];
+                'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-5.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ], ];
         Locate_And_Filter_Addon_Helper::add_marker_icons('basic', $markers);
 
         /* Load default map overlays */
@@ -142,44 +142,44 @@ class Locate_And_Filter_Pro
         /**
          * This class contains the Upgrader that addons will use.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class.upgrademe.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class.upgrademe.php';
         /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-loader.php';
 
         /**
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-i18n.php';
 
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-locate-and-filter-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'admin/class-locate-and-filter-admin.php';
 
         /**
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-locate-and-filter-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'public/class-locate-and-filter-public.php';
 
         /**
          * This class holds utilitary functions.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-tools.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-tools.php';
 
         /**
          * This class contains the Assets.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-assets.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-assets.php';
 
         /**
          * This class contains the Addon helpers.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-addon-helper.php';
+        require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-addon-helper.php';
 
         $this->loader = new Locate_And_Filter_Loader();
     }
@@ -387,7 +387,7 @@ class Locate_And_Filter_Pro
                 </td>
             </tr>
         <?php
-}
+    }
 
     /**
      * Edit custom fields in term.
@@ -396,21 +396,21 @@ class Locate_And_Filter_Pro
      */
     public function edit_new_custom_fields_checkbox($term)
     {
-        $status = get_term_meta($term->term_id, 'locateanything_checkbox_status', 1);?>
+        $status = get_term_meta($term->term_id, 'locateanything_checkbox_status', 1); ?>
             <tr class="form-field">
                 <th scope="row" valign="top"><label>Checkbox status</label></th>
                 <td>
                     <span>checked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="0"  <?php if ($status != 'unchecked') {
             echo 'checked="checked"';
-        }?> >
+        } ?> >
                     <span> unchecked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="unchecked" <?php if ($status == 'unchecked') {
             echo 'checked="checked"';
-        }?> ><br />
+        } ?> ><br />
                     <span class="description">Status for checkbox filter</span>
                 </td>
             </tr>
         <?php
-}
+    }
 
     /**
      * Add new custom fields in term.
@@ -426,7 +426,7 @@ class Locate_And_Filter_Pro
                 <p>Image url for filter LocateAnything</p>
             </div>
         <?php
-}
+    }
 
     /**
      * Add new custom fields in term.
@@ -443,7 +443,7 @@ class Locate_And_Filter_Pro
                         <span class="description">Status for checkbox filter</span>
             </div>
         <?php
-}
+    }
 
     /**
      * Save custom fields in term.
@@ -472,7 +472,7 @@ class Locate_And_Filter_Pro
             // проверка ключа
             $_key = sanitize_key($key);
             if ($_key !== $key) {
-                wp_die('bad key' . esc_html($key));
+                wp_die('bad key'.esc_html($key));
             }
 
             // очистка

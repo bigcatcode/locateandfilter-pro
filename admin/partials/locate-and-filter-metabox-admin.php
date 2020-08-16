@@ -17,13 +17,13 @@ function makeInput($type, $fieldname, $object_id, $default = '')
 </td></tr></table>
 
 <h2 class="nav-tab-wrapper">
-    <a data-pane="1"  data-animation="50%" class="active nav-tab"><?php _e('Map settings', 'locate-and-filter');?></a>
-    <a class="nav-tab" data-pane="6" data-animation="50%"><?php _e('Filters', 'locate-and-filter');?></a>
-    <a class="nav-tab" data-pane="4" data-animation="50%"><?php _e('Markers settings', 'locate-and-filter');?></a>
-    <a class="nav-tab" data-pane="2" data-animation="50%"><?php _e('Tooltip & Nav List', 'locate-and-filter');?></a>
-   	<a class="nav-tab" data-pane="3" data-animation="50%"><?php _e('Map Layouts', 'locate-and-filter');?></a>
+    <a data-pane="1"  data-animation="50%" class="active nav-tab"><?php _e('Map settings', 'locate-and-filter'); ?></a>
+    <a class="nav-tab" data-pane="6" data-animation="50%"><?php _e('Filters', 'locate-and-filter'); ?></a>
+    <a class="nav-tab" data-pane="4" data-animation="50%"><?php _e('Markers settings', 'locate-and-filter'); ?></a>
+    <a class="nav-tab" data-pane="2" data-animation="50%"><?php _e('Tooltip & Nav List', 'locate-and-filter'); ?></a>
+   	<a class="nav-tab" data-pane="3" data-animation="50%"><?php _e('Map Layouts', 'locate-and-filter'); ?></a>
 
-<a class="nav-tab" data-pane="5" data-animation="50%"><?php _e('Tools & Shortcodes', 'locate-and-filter');?></a>
+<a class="nav-tab" data-pane="5" data-animation="50%"><?php _e('Tools & Shortcodes', 'locate-and-filter'); ?></a>
 </h2>
 
 <div id="locate-anything-wrapper">
@@ -35,28 +35,29 @@ function makeInput($type, $fieldname, $object_id, $default = '')
 
   <!-- Map provider -->
 <tr id="map-provider">
-<td><?php _e('Map Overlay', 'locate-and-filter');?> &nbsp;<input type="button" data-target="map-provider" class="locate-anything-help"></td>
+<td><?php _e('Map Overlay', 'locate-and-filter'); ?> &nbsp;<input type="button" data-target="map-provider" class="locate-anything-help"></td>
 <td nowrap><select name="locate-anything-map-provider" id="locate-anything-map-provider">
 
 <?php foreach (Locate_And_Filter_Assets::getMapOverlays() as $overlay) {
     ?>
 	<option value="<?php echo $overlay->id; ?>" data-url="<?php echo $overlay->url; ?>" data-attribution="<?php echo $overlay->attribution; ?>" <?php if (get_post_meta($object->ID, 'locate-anything-map-provider', true) == $overlay->id) {
         echo 'selected';
-    }?> ><?php echo $overlay->name ?></option>
-<?php }?>
+    } ?> ><?php echo $overlay->name ?></option>
+<?php
+}?>
 
-</select><br><small><?php _e("<b>Important : </b> if you choose GoogleMaps you MUST enter a GoogleMaps API key in the <a href='" . admin_url() . "edit.php?post_type=locateandfiltermap&page=locate-anything-settings'>options page</a>", 'locate-and-filter');?> </small>
+</select><br><small><?php _e("<b>Important : </b> if you choose GoogleMaps you MUST enter a GoogleMaps API key in the <a href='".admin_url()."edit.php?post_type=locateandfiltermap&page=locate-anything-settings'>options page</a>", 'locate-and-filter'); ?> </small>
 </td></tr>
 
 <tr id='show-attr-label' >
 <td><?php _e('Show attribution label', 'locate-and-filter')?> &nbsp;<input type="button" data-target="show-attr-label" class="locate-anything-help"> </td>
 <td>
 			  <input type="radio" name="locate-anything-show-attribution-label" value="1" <?php if (get_post_meta($object->ID, 'locate-anything-show-attribution-label', true) == '1') {
-    echo 'checked';
-}?>> <?php _e('yes', 'locate-and-filter')?>
+        echo 'checked';
+    }?>> <?php _e('yes', 'locate-and-filter')?>
 			  <input type="radio" name="locate-anything-show-attribution-label" value="0" <?php if (get_post_meta($object->ID, 'locate-anything-show-attribution-label', true) == '0' || get_post_meta($object->ID, 'locate-anything-show-attribution-label', true) == false) {
-    echo 'checked';
-}?>> <?php _e('no', 'locate-and-filter')?></td>
+        echo 'checked';
+    }?>> <?php _e('no', 'locate-and-filter')?></td>
 </tr>
 
 <?php echo do_action('LocateAnything-general-settings-form', $object->ID); ?>
@@ -65,30 +66,30 @@ function makeInput($type, $fieldname, $object_id, $default = '')
 
 <!-- Map Style for GoogleMaps -->
 <tr id="map-hue">
-<td><?php _e('Map hue (GoogleMaps only)', 'locate-and-filter');?> &nbsp;<input type="button" data-target="map-hue" class="locate-anything-help"></td>
+<td><?php _e('Map hue (GoogleMaps only)', 'locate-and-filter'); ?> &nbsp;<input type="button" data-target="map-hue" class="locate-anything-help"></td>
 <td><input type="color" name="locate-anything-googlemaps-hue" value="<?php echo esc_attr(get_post_meta($object->ID, 'locate-anything-googlemaps-hue', true)); ?>"></td>
 </tr>
 
 
 <!-- Map Settings -->
 <tr id="map-width">
-<td><?php _e('Map width', 'locate-and-filter');?>&nbsp;<input type="button" data-target="map-width" class="locate-anything-help"></td>
+<td><?php _e('Map width', 'locate-and-filter'); ?>&nbsp;<input type="button" data-target="map-width" class="locate-anything-help"></td>
 <td> <input type="text" size="5" placeholder="100%,850px,..."  name="locate-anything-map-width" value="<?php if (get_post_meta($object->ID, 'locate-anything-map-width', true)) {
-    echo esc_attr(get_post_meta($object->ID, 'locate-anything-map-width', true));
-} else {
-    echo '100%';
-}?>"></td>
+        echo esc_attr(get_post_meta($object->ID, 'locate-anything-map-width', true));
+    } else {
+        echo '100%';
+    }?>"></td>
 </tr>
 <tr id="map-height">
-<td><?php _e('Map height', 'locate-and-filter');?> &nbsp;<input type="button" data-target="map-height" class="locate-anything-help"></td>
+<td><?php _e('Map height', 'locate-and-filter'); ?> &nbsp;<input type="button" data-target="map-height" class="locate-anything-help"></td>
 <td> <input type="text" size="5" placeholder="500px"  name="locate-anything-map-height" value="<?php if (get_post_meta($object->ID, 'locate-anything-map-height', true)) {
-    echo esc_attr(get_post_meta($object->ID, 'locate-anything-map-height', true));
-} else {
-    echo '500px';
-}?>"></td>
+        echo esc_attr(get_post_meta($object->ID, 'locate-anything-map-height', true));
+    } else {
+        echo '500px';
+    }?>"></td>
 </tr>
 <tr id="startposition">
-<td><?php _e('Default start position', 'locate-and-filter');?> &nbsp;<input type="button" data-target="startposition" class="locate-anything-help"></td>
+<td><?php _e('Default start position', 'locate-and-filter'); ?> &nbsp;<input type="button" data-target="startposition" class="locate-anything-help"></td>
 <td> <input type="text" size="12" placeholder="lat,lon"  name="locate-anything-start-position" id="locate-anything-start-position" value="<?php echo esc_attr(get_post_meta($object->ID, 'locate-anything-start-position', true)); ?>"></td>
 </tr>
 <tr id="maxzoom">
@@ -161,7 +162,7 @@ echo $v ? $v : 5?>"/>
 <tr id="navnumbers">
 <td><?php _e('Max number of results displayed in the list', 'locate-and-filter')?> &nbsp;<input type="button" data-target="navnumbers" class="locate-anything-help"></td>
 <td><input type="text"  size="5" name="locate-anything-nav-number" value="<?php $v = get_post_meta($object->ID, 'locate-anything-nav-number', true);
-echo $v ? $v : 10;?>"></td>
+echo $v ? $v : 10; ?>"></td>
 </tr>
 
 <tr id="display_only_inbound">
@@ -211,10 +212,10 @@ echo $v ? $v : 10;?>"></td>
 
 <table id="locate-anything-map-settings-page-6" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style="display:none" >
 <!-- Post Type / Source -->
-<tr><td colspan="2"><h2><?php _e('Choose a post type', 'locate-and-filter');?></h2></td></tr>
+<tr><td colspan="2"><h2><?php _e('Choose a post type', 'locate-and-filter'); ?></h2></td></tr>
 <tr id="map-source">
 <td>
-<b><?php _e('Post Type', 'locate-and-filter');?></b>&nbsp;<input type="button" data-target="map-source" class="locate-anything-help"></td>
+<b><?php _e('Post Type', 'locate-and-filter'); ?></b>&nbsp;<input type="button" data-target="map-source" class="locate-anything-help"></td>
 <td>
 <input type="hidden" name="locate-anything-filters" value='' >
 <select name="locate-anything-source" id="locate-anything-source">
@@ -228,7 +229,7 @@ foreach ($sources as $key => $value) {
         $sel = 'selected';
     } else {
         $sel = '';
-    }?>
+    } ?>
 			<option <?php echo $sel ?> value="<?php echo $key ?>"><?php echo $value ?></option>
 		<?php
 }
@@ -238,25 +239,26 @@ foreach ($post_types as $post_type) {
     ?>
 			  	<option value="<?php echo $post_type ?>" <?php if ($selected_element == $post_type) {
         echo ' selected ';
-    }?> ><?php echo get_post_type_object($post_type)->labels->singular_name ?></option>
-			  <?php	}?>
+    } ?> ><?php echo get_post_type_object($post_type)->labels->singular_name ?></option>
+			  <?php
+}?>
 </select></td>
 </tr>
 <!-- Filters -->
-<tr><td colspan="2"><h2><?php _e('Filter the markers (optional)', 'locate-and-filter');?></h2></td></tr>
+<tr><td colspan="2"><h2><?php _e('Filter the markers (optional)', 'locate-and-filter'); ?></h2></td></tr>
 <tr>
-<td colspan="2"><b><?php _e('Filter the markers ', 'locate-and-filter');?></b> &nbsp;<input type="button" data-target="map-filters" class="locate-anything-help"></td>
+<td colspan="2"><b><?php _e('Filter the markers ', 'locate-and-filter'); ?></b> &nbsp;<input type="button" data-target="map-filters" class="locate-anything-help"></td>
 </tr>
 <?php echo do_action('LocateAnything-general-settings-form-filters', $object->ID) ?>
 <tr  id="map-filters">
 <td colspan="2"><span id='filters'></span></td>
 </tr>
 
-<tr><td colspan="2"><h2><?php _e('How is this map filterable ?', 'locate-and-filter');?></h2></td></tr>
+<tr><td colspan="2"><h2><?php _e('How is this map filterable ?', 'locate-and-filter'); ?></h2></td></tr>
 <tr  id="tr-show-filters">
 <!-- defines show filters to empty, will be overwritten by the real show filters if all checkboxes are not unchecked -->
 <input type="hidden" name="locate-anything-show-filters[]" value=''>
-<td><b><?php _e('Make this map filterable by', 'locate-and-filter');?></b>:&nbsp;<input type="button" data-target="tr-show-filters" class="locate-anything-help"></td>
+<td><b><?php _e('Make this map filterable by', 'locate-and-filter'); ?></b>:&nbsp;<input type="button" data-target="tr-show-filters" class="locate-anything-help"></td>
 <td ><span id='show-filters'></span></td>
 </tr>
 </table>
@@ -265,27 +267,28 @@ foreach ($post_types as $post_type) {
 <tr><td colspan="2"><h2><?php _e('Choose the default marker icon', 'locate-and-filter')?></h2></td></tr>
 <tr>
 <td><input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-marker-type', true) == 'standard' || get_post_meta($object->ID, 'locate-anything-marker-type', true) == false) {
-    echo 'checked';
-}?> name="locate-anything-marker-type" value="standard"> <b><?php _e('Choose an icon', 'locate-and-filter')?></b></td>
+        echo 'checked';
+    }?> name="locate-anything-marker-type" value="standard"> <b><?php _e('Choose an icon', 'locate-and-filter')?></b></td>
 
 <td>
 			   <!-- marker selector -->
 			   <div id="locate-anything-marker-selector">
 			<select style='width:80px !important' name="locate-anything-default-marker" id="locate-anything-default-marker">
 				 <?php foreach (Locate_And_Filter_Assets::getMarkers() as $marker) {
-    ?>
+        ?>
 				 	<option value="<?php echo $marker->id ?>" <?php if (esc_attr(get_post_meta($object->ID, 'locate-anything-default-marker', true)) == $marker->id) {
-        echo 'selected';
-    }?>><?php echo $marker->url ?></option>
-		<?php }?>
+            echo 'selected';
+        } ?>><?php echo $marker->url ?></option>
+		<?php
+    }?>
 			</select>
 </div></td>
 </tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr>
 <td id="medialibrary"><input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-marker-type', true) == 'medialibrary') {
-    echo 'checked';
-}?> name="locate-anything-marker-type" value="medialibrary"> <b><?php _e('Add an icon from the media library', 'locate-and-filter')?></b>&nbsp;<input type="button" data-target="medialibrary" class="locate-anything-help"></td>
+        echo 'checked';
+    }?> name="locate-anything-marker-type" value="medialibrary"> <b><?php _e('Add an icon from the media library', 'locate-and-filter')?></b>&nbsp;<input type="button" data-target="medialibrary" class="locate-anything-help"></td>
 <td><img id="default-marker-media">
 	<div class="uploader">
 	<input id="locate-anything-marker-type" name="locate-anything-default-marker-media" type="hidden" value="<?php echo esc_attr(get_post_meta($object->ID, 'locate-anything-default-marker-media', true)) ?>" /> <input id="locate-anything-marker-type_button" class="button-admin"  name="locate-anything-marker-type_button" type="text" value="<?php _e('Add', 'locate-and-filter')?>" />
@@ -297,8 +300,8 @@ foreach ($post_types as $post_type) {
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr>
 <td><input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-marker-type', true) == 'awesomemarker') {
-    echo 'checked';
-}?> name="locate-anything-marker-type" value="awesomemarker"> <b><?php _e('Create an icon', 'locate-and-filter')?></b></td>
+        echo 'checked';
+    }?> name="locate-anything-marker-type" value="awesomemarker"> <b><?php _e('Create an icon', 'locate-and-filter')?></b></td>
 
 <td >
 <!-- Awesome marker creator -->
@@ -306,7 +309,7 @@ foreach ($post_types as $post_type) {
 					<?php _e('Symbol', 'locate-and-filter')?> : <select style='width:80px !important'  name="locate-anything-marker-symbol" id="locate-anything-marker-symbol">
 					<?php
 $selected_awesome = get_post_meta($object->ID, 'locate-anything-marker-symbol', true);
-include plugin_dir_path(__FILE__) . '../../includes/ionicon-options.php'?>
+include plugin_dir_path(__FILE__).'../../includes/ionicon-options.php'?>
 					</select>
 					<br>
 					<?php _e('Symbol color', 'locate-and-filter')?> : <input type="color" value="<?php echo get_post_meta($object->ID, 'locate-anything-marker-symbol-color', true) ?>"  name="locate-anything-marker-symbol-color">
@@ -317,7 +320,7 @@ include plugin_dir_path(__FILE__) . '../../includes/ionicon-options.php'?>
     ?>
 						<option <?php if ($color == get_post_meta($object->ID, 'locate-anything-marker-color', true)) {
         echo 'selected';
-    }?> value="<?php echo $color ?>"><?php echo $color ?></option>
+    } ?> value="<?php echo $color ?>"><?php echo $color ?></option>
 					<?php
 }?>
 					</select>
@@ -368,8 +371,8 @@ include plugin_dir_path(__FILE__) . '../../includes/ionicon-options.php'?>
 <tr><td><h2><?php _e('Cache')?></h2></td></tr>
 <tr>
 <td><?php if (unserialize(get_option('locate-anything-option-enable-cache')) == 0) {
-    _e('The cache is currently disabled. You can activate it in the options page', 'locate-and-filter');
-} else {?>
+        _e('The cache is currently disabled. You can activate it in the options page', 'locate-and-filter');
+    } else {?>
 <a onclick='refresh_cache()'><?php _e('Refresh cache for this map', 'locate-and-filter')?></a><br/><?php _e('Status', 'locate-and-filter')?> : <span id="result_cache"><?php _e('ready', 'locate-and-filter')?></span>
 <?php }?>
 </td>
@@ -379,18 +382,18 @@ include plugin_dir_path(__FILE__) . '../../includes/ionicon-options.php'?>
 <table id="locate-anything-map-settings-page-2" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >
 <tr><td><h2><?php _e('Navlist Settings', 'locate-and-filter')?></h2></td></tr>
 <tr><td><?php _e('Event', 'locate-and-filter')?></td><td><input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-navlist-event', true) == 'click') {
-    echo 'checked';
-}?> name="locate-anything-navlist-event" value="click">Click <input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-navlist-event', true) == 'hover' || get_post_meta($object->ID, 'locate-anything-navlist-event', true) == false) {
-    echo 'checked';
-}?> name="locate-anything-navlist-event" value="hover">Hover</radio></td></tr>
+        echo 'checked';
+    }?> name="locate-anything-navlist-event" value="click">Click <input type="radio" <?php if (get_post_meta($object->ID, 'locate-anything-navlist-event', true) == 'hover' || get_post_meta($object->ID, 'locate-anything-navlist-event', true) == false) {
+        echo 'checked';
+    }?> name="locate-anything-navlist-event" value="hover">Hover</radio></td></tr>
 <tr><td><h2><?php _e('Tooltips Settings', 'locate-and-filter')?></h2></td></tr>
 <tr>
 <td><b><?php _e('Tooltip style', 'locate-and-filter')?> </b>:</td>
 <td><select name="locate-anything-tooltip-style"><option <?php if (get_post_meta($object->ID, 'locate-anything-tooltip-style', true) == 'rounded') {
-    echo 'selected';
-}?> value="rounded"><?php _e('Rounded corners', 'locate-and-filter')?></option><option <?php if (get_post_meta($object->ID, 'locate-anything-tooltip-style', true) == 'squared') {
-    echo 'selected';
-}?> value="squared"><?php _e('Squared corners', 'locate-and-filter')?></option></select></td>
+        echo 'selected';
+    }?> value="rounded"><?php _e('Rounded corners', 'locate-and-filter')?></option><option <?php if (get_post_meta($object->ID, 'locate-anything-tooltip-style', true) == 'squared') {
+        echo 'selected';
+    }?> value="squared"><?php _e('Squared corners', 'locate-and-filter')?></option></select></td>
 </tr>
 <tr>
 <td><b><?php _e('Tooltip Preset', 'locate-and-filter')?> </b>:</td>
@@ -410,7 +413,7 @@ foreach ($tooltip_presets as $preset) {
     } else {
         $say = '';
     }
-    echo '<option ' . $say . ' value="' . $preset->class . '" data-template="' . $preset->template . '">' . $preset->name . '</option>';
+    echo '<option '.$say.' value="'.$preset->class.'" data-template="'.$preset->template.'">'.$preset->name.'</option>';
 }
 ?>
 </select>
@@ -434,7 +437,7 @@ foreach ($navlist_presets as $preset) {
     } else {
         $say = '';
     }
-    echo '<option ' . $say . ' value="' . $preset->class . '" data-template="' . $preset->template . '">' . $preset->name . '</option>';
+    echo '<option '.$say.' value="'.$preset->class.'" data-template="'.$preset->template.'">'.$preset->name.'</option>';
 }?>
 </select>
 </td>
@@ -451,13 +454,13 @@ foreach ($navlist_presets as $preset) {
 			</div></td>
 </tr>
 <tr >
-<td colspan="2" id="templates"><br><b ><?php _e('Default navigation list template', 'locate-and-filter')?>&nbsp;<input type="button" data-target="templates" class="locate-anything-help"></b> <br> <textarea style='width:90%;height:20em'  name="locate-anything-default-nav-template" id="locate-anything-default-nav-template"><?php $ct = esc_attr(get_post_meta($object->ID, 'locate-anything-default-nav-template', true));if (!$ct) {
+<td colspan="2" id="templates"><br><b ><?php _e('Default navigation list template', 'locate-and-filter')?>&nbsp;<input type="button" data-target="templates" class="locate-anything-help"></b> <br> <textarea style='width:90%;height:20em'  name="locate-anything-default-nav-template" id="locate-anything-default-nav-template"><?php $ct = esc_attr(get_post_meta($object->ID, 'locate-anything-default-nav-template', true)); if (!$ct) {
     echo $u['navlist'];
 } else {
     echo $ct;
 }?></textarea>
 			  <br/>
-			  <b><?php _e('Default Tooltip template', 'locate-and-filter')?>&nbsp;<input type="button" data-target="templates" class="locate-anything-help"> </b> <br> <textarea style='width:90%;height:20em' name="locate-anything-default-tooltip-template" id="locate-anything-default-tooltip-template"><?php $ct = esc_attr(get_post_meta($object->ID, 'locate-anything-default-tooltip-template', true));if (!$ct) {
+			  <b><?php _e('Default Tooltip template', 'locate-and-filter')?>&nbsp;<input type="button" data-target="templates" class="locate-anything-help"> </b> <br> <textarea style='width:90%;height:20em' name="locate-anything-default-tooltip-template" id="locate-anything-default-tooltip-template"><?php $ct = esc_attr(get_post_meta($object->ID, 'locate-anything-default-tooltip-template', true)); if (!$ct) {
     echo $u['tooltip'];
 } else {
     echo $ct;
@@ -482,8 +485,9 @@ foreach ($navlist_presets as $preset) {
     ?>
 			 	 	  <option data-url='<?php echo json_encode($template->url); ?>' value="<?php echo $template->id; ?>" <?php if (get_post_meta($object->ID, 'locate-anything-map-template', true) == $template->id) {
         echo 'selected';
-    }?> ><?php echo $template->name ?></option>
-			 	 	  		<?php }?></select></td></tr>
+    } ?> ><?php echo $template->name ?></option>
+			 	 	  		<?php
+}?></select></td></tr>
 <tr>
 <td colspan="2" id="layout_editor"></td>
 </tr>
@@ -510,7 +514,7 @@ jQuery("#locate-anything-map-template").change(function(e){	refresh_layout_code(
 		refresh_preview();
 	});
 	/* help texts */
-	<?php include plugin_dir_path(__FILE__) . 'locate-and-filter-help.php';?>
+	<?php include plugin_dir_path(__FILE__).'locate-and-filter-help.php'; ?>
 		/* initializes taxonomies */
 			locate_anything_refresh_filters();
 		/* Listener : on change of post type,refresh taxonomies */
@@ -556,35 +560,35 @@ if (is_array($the_filters)) {
 $jsObj = '';
 if (is_array($the_filters)) {
     foreach ($the_filters as $filter) {
-        $r = get_post_meta($object->ID, 'locate-anything-display-filter-' . $filter, true);
+        $r = get_post_meta($object->ID, 'locate-anything-display-filter-'.$filter, true);
         if (!empty($r)) {
             $jsObj .= "'$filter':'$r',";
         }
 
-        $r_label = get_post_meta($object->ID, 'locate-anything-filter-selector-label-' . $filter, true);
-        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-label-' . $filter, true))) {
+        $r_label = get_post_meta($object->ID, 'locate-anything-filter-selector-label-'.$filter, true);
+        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-label-'.$filter, true))) {
             $jsObj .= "'filter_label-$filter':'$r_label',";
         }
 
-        $r_sort = get_post_meta($object->ID, 'locate-anything-filter-selector-sort-' . $filter, true);
-        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-sort-' . $filter, true))) {
+        $r_sort = get_post_meta($object->ID, 'locate-anything-filter-selector-sort-'.$filter, true);
+        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-sort-'.$filter, true))) {
             $jsObj .= "'filter_sort-$filter':'$r_sort',";
         }
 
-        $r_icon = get_post_meta($object->ID, 'locate-anything-filter-selector-icon-' . $filter, true);
-        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-icon-' . $filter, true))) {
+        $r_icon = get_post_meta($object->ID, 'locate-anything-filter-selector-icon-'.$filter, true);
+        if (!empty(get_post_meta($object->ID, 'locate-anything-filter-selector-icon-'.$filter, true))) {
             $jsObj .= "'filter_icon-$filter':'$r_icon',";
         }
 
-        $m = get_post_meta($object->ID, 'locate-anything-min-range-' . $filter, true);
-        $M = get_post_meta($object->ID, 'locate-anything-max-range-' . $filter, true);
+        $m = get_post_meta($object->ID, 'locate-anything-min-range-'.$filter, true);
+        $M = get_post_meta($object->ID, 'locate-anything-max-range-'.$filter, true);
         if (!empty($m)) {
             $jsObj .= "'locate-anything-min-range-$filter':'$m',";
             $jsObj .= "'locate-anything-max-range-$filter':'$M',";
         }
     }
 }
-echo 'var display_filters={' . $jsObj . '};';
+echo 'var display_filters={'.$jsObj.'};';
 
 ?>
 
