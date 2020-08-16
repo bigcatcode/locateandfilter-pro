@@ -1,7 +1,10 @@
 <?php
+
+// Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
-} // Exit if accessed directly
+}
+
 /**
  * The file that defines the core plugin class.
  *
@@ -87,36 +90,36 @@ class Locate_And_Filter_Pro
     {
 
         /* Load default layouts */
-        $layouts = [(object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-left.php', 'name' => 'Default Layout left'], (object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-right.php', 'name' => 'Default Layout right'], (object) ['url' => plugin_dir_path(dirname(__FILE__)).'/assets/mapTemplates/template-project.php', 'name' => 'Layout for projects']];
+        $layouts = [(object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-left.php', 'name' => 'Default Layout left'], (object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-right.php', 'name' => 'Default Layout right'], (object) ['url' => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-project.php', 'name' => 'Layout for projects']];
         Locate_And_Filter_Addon_Helper::add_map_layouts('basic', $layouts);
 
         /* Load default marker icons */
-        $markers = [(object) ['url' => plugin_dir_url(dirname(__FILE__)).'public/js/leaflet-0.7.3/images/marker-icon.png', 'description' => '', 'width' => 25, 'height' => 41, 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'public/js/leaflet-0.7.3/images/marker-shadow.png', 'shadowWidth' => '25', 'shadowHeight' => '41'],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-8.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-7.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-9.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-6.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-3.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-13.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-4.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-10.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-12.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ],
-        (object) [
-            'url' => plugin_dir_url(dirname(__FILE__)).'assets/markers/48x48-marker-5.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)).'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48', ], ];
+        $markers = [(object) ['url' => plugin_dir_url(dirname(__FILE__)) . 'public/js/leaflet-0.7.3/images/marker-icon.png', 'description' => '', 'width' => 25, 'height' => 41, 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'public/js/leaflet-0.7.3/images/marker-shadow.png', 'shadowWidth' => '25', 'shadowHeight' => '41'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-8.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-7.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-9.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-6.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-3.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-13.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-4.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-10.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-12.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48'],
+            (object) [
+                'url' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/48x48-marker-5.png', 'description' => '', 'width' => '48', 'height' => '48', 'shadowUrl' => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', 'shadowWidth' => '48', 'shadowHeight' => '48']];
         Locate_And_Filter_Addon_Helper::add_marker_icons('basic', $markers);
 
         /* Load default map overlays */
         $overlays = [(object) ['name' => 'OpenStreetMap', 'url' => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 'attribution' => 'OpenStreetMap', 'maxZoom' => 18, 'minZoom' => 2], (object) ['name' => 'GoogleMaps TERRAIN', 'url' => 'TERRAIN', 'attribution' => 'GoogleMaps', 'maxZoom' => 18, 'minZoom' => 2], (object) ['name' => 'GoogleMaps ROADMAP', 'url' => 'ROADMAP', 'attribution' => 'GoogleMaps', 'maxZoom' => 18, 'minZoom' => 2], (object) ['name' => 'GoogleMaps SATELLITE', 'url' => 'SATELLITE', 'attribution' => 'GoogleMaps', 'maxZoom' => 18, 'minZoom' => 2]];
-            Locate_And_Filter_Addon_Helper::add_overlays('basic', $overlays);
+        Locate_And_Filter_Addon_Helper::add_overlays('basic', $overlays);
     }
 
     /**
@@ -136,49 +139,49 @@ class Locate_And_Filter_Pro
      */
     private function load_dependencies()
     {
-            /**
-             * This class contains the Upgrader that addons will use.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class.upgrademe.php';
-            /**
-             * The class responsible for orchestrating the actions and filters of the
-             * core plugin.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-loader.php';
+        /**
+         * This class contains the Upgrader that addons will use.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class.upgrademe.php';
+        /**
+         * The class responsible for orchestrating the actions and filters of the
+         * core plugin.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-loader.php';
 
-            /**
-             * The class responsible for defining internationalization functionality
-             * of the plugin.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-i18n.php';
+        /**
+         * The class responsible for defining internationalization functionality
+         * of the plugin.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-i18n.php';
 
-            /**
-             * The class responsible for defining all actions that occur in the admin area.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'admin/class-locate-and-filter-admin.php';
+        /**
+         * The class responsible for defining all actions that occur in the admin area.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-locate-and-filter-admin.php';
 
-            /**
-             * The class responsible for defining all actions that occur in the public-facing
-             * side of the site.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'public/class-locate-and-filter-public.php';
+        /**
+         * The class responsible for defining all actions that occur in the public-facing
+         * side of the site.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-locate-and-filter-public.php';
 
-            /**
-             * This class holds utilitary functions.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-tools.php';
+        /**
+         * This class holds utilitary functions.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-tools.php';
 
-            /**
-             * This class contains the Assets.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-assets.php';
+        /**
+         * This class contains the Assets.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-assets.php';
 
-            /**
-             * This class contains the Addon helpers.
-             */
-            require_once plugin_dir_path(dirname(__FILE__)).'includes/class-locate-and-filter-addon-helper.php';
+        /**
+         * This class contains the Addon helpers.
+         */
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-addon-helper.php';
 
-            $this->loader = new Locate_And_Filter_Loader();
+        $this->loader = new Locate_And_Filter_Loader();
     }
 
     /**
@@ -191,10 +194,10 @@ class Locate_And_Filter_Pro
      */
     private function set_locale()
     {
-            $plugin_i18n = new Locate_And_Filter_i18n();
-            $plugin_i18n->set_domain($this->get_plugin_name());
+        $plugin_i18n = new Locate_And_Filter_i18n();
+        $plugin_i18n->set_domain($this->get_plugin_name());
 
-            $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
+        $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
     }
 
     /**
@@ -205,53 +208,53 @@ class Locate_And_Filter_Pro
      */
     private function define_admin_hooks()
     {
-            $plugin_admin = new Locate_And_Filter_Admin($this->get_plugin_name(), $this->get_version());
-            $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new Locate_And_Filter_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
 
-            $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-            $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
-            /* additional hooks*/
-            $this->loader->add_action('wp_ajax_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
 
-            /* additional hooks*/
-            $this->loader->add_action('wp_ajax_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
 
-            /* additional hooks*/
-            $this->loader->add_action('wp_ajax_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
 
-            $this->loader->add_action('wp_ajax_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
+        $this->loader->add_action('wp_ajax_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
 
-            $this->loader->add_action('wp_ajax_refresh_cache', $plugin_public, 'refresh_cache', 10, 2);
-            $this->loader->add_action('wp_ajax_nopriv_refresh_cache', $plugin_public, 'refresh_cache', 10, 2);
+        $this->loader->add_action('wp_ajax_refresh_cache', $plugin_public, 'refresh_cache', 10, 2);
+        $this->loader->add_action('wp_ajax_nopriv_refresh_cache', $plugin_public, 'refresh_cache', 10, 2);
 
-            $this->loader->add_action('wp_ajax_getLayoutCode', $plugin_admin, 'getLayoutCode', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_getLayoutCode', $plugin_admin, 'getLayoutCode', 10, 0);
+        $this->loader->add_action('wp_ajax_getLayoutCode', $plugin_admin, 'getLayoutCode', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_getLayoutCode', $plugin_admin, 'getLayoutCode', 10, 0);
 
-            $this->loader->add_action('wp_ajax_LAgetFilters', $plugin_admin, 'getFilters', 10, 0);
-            $this->loader->add_action('wp_ajax_nopriv_LAgetFilters', $plugin_admin, 'getFilters', 10, 0);
+        $this->loader->add_action('wp_ajax_LAgetFilters', $plugin_admin, 'getFilters', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetFilters', $plugin_admin, 'getFilters', 10, 0);
 
-            //$this->loader->add_action('wp_loaded', $plugin_admin, 'clear_hooks_for_preview',100000);
+        //$this->loader->add_action('wp_loaded', $plugin_admin, 'clear_hooks_for_preview',100000);
 
-            $this->loader->add_action('admin_menu', $plugin_admin, 'setup_admin_menu', 10, 0);
-            $this->loader->add_action('init', $plugin_admin, 'createCustomType', 0);
-            //$this->loader->add_action('admin_init', $plugin_admin, 'load_preview',0);
+        $this->loader->add_action('admin_menu', $plugin_admin, 'setup_admin_menu', 10, 0);
+        $this->loader->add_action('init', $plugin_admin, 'createCustomType', 0);
+        //$this->loader->add_action('admin_init', $plugin_admin, 'load_preview',0);
 
-            $this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_post_meta_boxes');
-            $this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_admin_meta_boxes', 0);
+        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_post_meta_boxes');
+        $this->loader->add_action('add_meta_boxes', $plugin_admin, 'add_admin_meta_boxes', 0);
 
-            $this->loader->add_action('save_post', $plugin_admin, 'save_metabox_data', 10, 2);
-            $this->loader->add_action('admin_init', $plugin_admin, 'save_options', 10, 2);
+        $this->loader->add_action('save_post', $plugin_admin, 'save_metabox_data', 10, 2);
+        $this->loader->add_action('admin_init', $plugin_admin, 'save_options', 10, 2);
 
-            $this->loader->add_action('admin_notices', $plugin_admin, 'check_cache_permissions', 10, 2);
-            /* filters */
-            $this->loader->add_filter('upload_mimes', $plugin_admin, 'add_mime_types', 1, 1);
+        $this->loader->add_action('admin_notices', $plugin_admin, 'check_cache_permissions', 10, 2);
+        /* filters */
+        $this->loader->add_filter('upload_mimes', $plugin_admin, 'add_mime_types', 1, 1);
 
-            $this->loader->add_action('admin_menu', $plugin_admin, 'saveRootPath', 1000000, 0);
+        $this->loader->add_action('admin_menu', $plugin_admin, 'saveRootPath', 1000000, 0);
     }
 
     /**
@@ -262,17 +265,17 @@ class Locate_And_Filter_Pro
      */
     private function define_public_hooks()
     {
-            $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
-            $plugin_public->setup_shortcodes();
+        $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public->setup_shortcodes();
 
-            // loading of styles and scripts has been moved to shortcode methods in order to avoid loading the scripts when not necessary
+        // loading of styles and scripts has been moved to shortcode methods in order to avoid loading the scripts when not necessary
 
-            //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-            // $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        //$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+        // $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-            /* additional hooks*/
-            $this->loader->add_action('wp_ajax_getMarkers', $plugin_public, 'getMarkers', 0);
-            $this->loader->add_action('wp_ajax_nopriv_getMarkers', $plugin_public, 'getMarkers', 0);
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_getMarkers', $plugin_public, 'getMarkers', 0);
+        $this->loader->add_action('wp_ajax_nopriv_getMarkers', $plugin_public, 'getMarkers', 0);
     }
 
     /**
@@ -282,7 +285,7 @@ class Locate_And_Filter_Pro
      */
     public function run()
     {
-            $this->loader->run();
+        $this->loader->run();
     }
 
     /**
@@ -295,7 +298,7 @@ class Locate_And_Filter_Pro
      */
     public function get_plugin_name()
     {
-            return $this->plugin_name;
+        return $this->plugin_name;
     }
 
     /**
@@ -307,7 +310,7 @@ class Locate_And_Filter_Pro
      */
     public function get_loader()
     {
-            return $this->loader;
+        return $this->loader;
     }
 
     /**
@@ -319,7 +322,7 @@ class Locate_And_Filter_Pro
      */
     public function get_version()
     {
-            return $this->version;
+        return $this->version;
     }
 
     /**
@@ -330,42 +333,42 @@ class Locate_And_Filter_Pro
      */
     public function load_custom_term_field()
     {
-            $locateanything_custom_field_for_tax = get_option('locateanything_custom_field_for_tax');
-            if ($locateanything_custom_field_for_tax) {
-                foreach ($locateanything_custom_field_for_tax as $key => $value) {
-                    if ($value == 'true') {
-                        // $taxname = 'cat_place';
-                        $taxname = $key;
-                        //Поля при добавлении элемента таксономии
-                        add_action("{$taxname}_add_form_fields", [$this, 'add_new_custom_fields']);
-                        //Поля при редактировании элемента таксономии
-                        add_action("{$taxname}_edit_form_fields", [$this, 'edit_new_custom_fields']);
+        $locateanything_custom_field_for_tax = get_option('locateanything_custom_field_for_tax');
+        if ($locateanything_custom_field_for_tax) {
+            foreach ($locateanything_custom_field_for_tax as $key => $value) {
+                if ($value == 'true') {
+                    // $taxname = 'cat_place';
+                    $taxname = $key;
+                    //Поля при добавлении элемента таксономии
+                    add_action("{$taxname}_add_form_fields", [$this, 'add_new_custom_fields']);
+                    //Поля при редактировании элемента таксономии
+                    add_action("{$taxname}_edit_form_fields", [$this, 'edit_new_custom_fields']);
 
-                        //Сохранение при добавлении элемента таксономии
-                        add_action("create_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
-                        //Сохранение при редактировании элемента таксономии
-                        add_action("edited_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
-                    }
+                    //Сохранение при добавлении элемента таксономии
+                    add_action("create_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
+                    //Сохранение при редактировании элемента таксономии
+                    add_action("edited_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
                 }
             }
-            $locateanything_custom_field_for_tax_checkbox = get_option('locateanything_custom_field_for_tax_checkbox');
-            if ($locateanything_custom_field_for_tax_checkbox) {
-                foreach ($locateanything_custom_field_for_tax_checkbox as $key => $value) {
-                    if ($value == 'checkbox') {
-                        // $taxname = 'cat_place';
-                        $taxname = $key;
-                        //Поля при добавлении элемента таксономии
-                        add_action("{$taxname}_add_form_fields", [$this, 'add_new_custom_fields_checkbox']);
-                        //Поля при редактировании элемента таксономии
-                        add_action("{$taxname}_edit_form_fields", [$this, 'edit_new_custom_fields_checkbox']);
+        }
+        $locateanything_custom_field_for_tax_checkbox = get_option('locateanything_custom_field_for_tax_checkbox');
+        if ($locateanything_custom_field_for_tax_checkbox) {
+            foreach ($locateanything_custom_field_for_tax_checkbox as $key => $value) {
+                if ($value == 'checkbox') {
+                    // $taxname = 'cat_place';
+                    $taxname = $key;
+                    //Поля при добавлении элемента таксономии
+                    add_action("{$taxname}_add_form_fields", [$this, 'add_new_custom_fields_checkbox']);
+                    //Поля при редактировании элемента таксономии
+                    add_action("{$taxname}_edit_form_fields", [$this, 'edit_new_custom_fields_checkbox']);
 
-                        //Сохранение при добавлении элемента таксономии
-                        add_action("create_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
-                        //Сохранение при редактировании элемента таксономии
-                        add_action("edited_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
-                    }
+                    //Сохранение при добавлении элемента таксономии
+                    add_action("create_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
+                    //Сохранение при редактировании элемента таксономии
+                    add_action("edited_{$taxname}", [$this, 'save_custom_taxonomy_meta']);
                 }
             }
+        }
     }
 
     /**
@@ -375,7 +378,7 @@ class Locate_And_Filter_Pro
      */
     public function edit_new_custom_fields($term)
     {
-            ?>
+        ?>
             <tr class="form-field">
                 <th scope="row" valign="top"><label>Image url</label></th>
                 <td>
@@ -384,7 +387,7 @@ class Locate_And_Filter_Pro
                 </td>
             </tr>
         <?php
-    }
+}
 
     /**
      * Edit custom fields in term.
@@ -393,21 +396,21 @@ class Locate_And_Filter_Pro
      */
     public function edit_new_custom_fields_checkbox($term)
     {
-            $status = get_term_meta($term->term_id, 'locateanything_checkbox_status', 1); ?>
+        $status = get_term_meta($term->term_id, 'locateanything_checkbox_status', 1);?>
             <tr class="form-field">
                 <th scope="row" valign="top"><label>Checkbox status</label></th>
                 <td>
                     <span>checked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="0"  <?php if ($status != 'unchecked') {
-                echo 'checked="checked"';
-            } ?> >
+            echo 'checked="checked"';
+        }?> >
                     <span> unchecked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="unchecked" <?php if ($status == 'unchecked') {
-                echo 'checked="checked"';
-            } ?> ><br />
+            echo 'checked="checked"';
+        }?> ><br />
                     <span class="description">Status for checkbox filter</span>
                 </td>
             </tr>
         <?php
-    }
+}
 
     /**
      * Add new custom fields in term.
@@ -416,14 +419,14 @@ class Locate_And_Filter_Pro
      */
     public function add_new_custom_fields($taxonomy_slug)
     {
-            ?>
-        <div class="form-field">
-            <label for="tag-locateanything_term_image_url">Image url</label>
-            <input name="extra[locateanything_term_image_url]" id="tag-locateanything_term_image_url" type="text" value="" />
-            <p>Image url for filter LocateAnything</p>
-        </div>
+        ?>
+            <div class="form-field">
+                <label for="tag-locateanything_term_image_url">Image url</label>
+                <input name="extra[locateanything_term_image_url]" id="tag-locateanything_term_image_url" type="text" value="" />
+                <p>Image url for filter LocateAnything</p>
+            </div>
         <?php
-    }
+}
 
     /**
      * Add new custom fields in term.
@@ -432,15 +435,15 @@ class Locate_And_Filter_Pro
      */
     public function add_new_custom_fields_checkbox($taxonomy_slug)
     {
-            ?>
-        <div class="form-field">
-            <label for="tag-locateanything_checkbox_status">Checkbox status</label>
-                    <span>checked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="0"  >
-                    <span> unchecked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="unchecked" checked="checked" ><br />
-                    <span class="description">Status for checkbox filter</span>
-        </div>
+        ?>
+            <div class="form-field">
+                <label for="tag-locateanything_checkbox_status">Checkbox status</label>
+                        <span>checked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="0"  >
+                        <span> unchecked </span><input type="radio" name="extra[locateanything_checkbox_status]" value="unchecked" checked="checked" ><br />
+                        <span class="description">Status for checkbox filter</span>
+            </div>
         <?php
-    }
+}
 
     /**
      * Save custom fields in term.
@@ -449,44 +452,44 @@ class Locate_And_Filter_Pro
      */
     public function save_custom_taxonomy_meta($term_id)
     {
-            if (!isset($_POST['extra'])) {
-                return;
-            }
-            if (!current_user_can('edit_term', $term_id)) {
-                return;
-            }
-            if (
-                !wp_verify_nonce($_POST['_wpnonce'], "update-tag_$term_id") && // wp_nonce_field( 'update-tag_' . $tag_ID );
-                !wp_verify_nonce($_POST['_wpnonce_add-tag'], 'add-tag') // wp_nonce_field('add-tag', '_wpnonce_add-tag');
-            ) {
-                return;
-            }
+        if (!isset($_POST['extra'])) {
+            return;
+        }
+        if (!current_user_can('edit_term', $term_id)) {
+            return;
+        }
+        if (
+            !wp_verify_nonce($_POST['_wpnonce'], "update-tag_$term_id") && // wp_nonce_field( 'update-tag_' . $tag_ID );
+            !wp_verify_nonce($_POST['_wpnonce_add-tag'], 'add-tag') // wp_nonce_field('add-tag', '_wpnonce_add-tag');
+        ) {
+            return;
+        }
 
-            // Все ОК! Теперь, нужно сохранить/удалить данные
-            $extra = wp_unslash($_POST['extra']);
+        // Все ОК! Теперь, нужно сохранить/удалить данные
+        $extra = wp_unslash($_POST['extra']);
 
-            foreach ($extra as $key => $val) {
-                // проверка ключа
-                $_key = sanitize_key($key);
-                if ($_key !== $key) {
-                    wp_die('bad key'.esc_html($key));
-                }
-
-                // очистка
-                if ($_key === 'tag_posts_shortcode_links') {
-                    $val = sanitize_textarea_field(strip_tags($val));
-                } else {
-                    $val = sanitize_text_field($val);
-                }
-
-                // сохранение
-                if (!$val) {
-                    delete_term_meta($term_id, $_key);
-                } else {
-                    update_term_meta($term_id, $_key, $val);
-                }
+        foreach ($extra as $key => $val) {
+            // проверка ключа
+            $_key = sanitize_key($key);
+            if ($_key !== $key) {
+                wp_die('bad key' . esc_html($key));
             }
 
-            return $term_id;
+            // очистка
+            if ($_key === 'tag_posts_shortcode_links') {
+                $val = sanitize_textarea_field(strip_tags($val));
+            } else {
+                $val = sanitize_text_field($val);
+            }
+
+            // сохранение
+            if (!$val) {
+                delete_term_meta($term_id, $_key);
+            } else {
+                update_term_meta($term_id, $_key, $val);
+            }
+        }
+
+        return $term_id;
     }
 }

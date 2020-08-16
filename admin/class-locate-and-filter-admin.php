@@ -2,12 +2,14 @@
 if (!defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+
 /**
  * The admin-specific functionality of the plugin.
  *
  * @link       http://monothemes.com/
  * @since      1.0.0
  */
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -16,7 +18,7 @@ if (!defined('ABSPATH')) {
  *
  * @author AMonin <monothemes@gmail.com>
  */
-class Locate_And_Filter_Admin
+class LocateAndFilterAdmin
 {
     /**
      * The ID of this plugin.
@@ -69,15 +71,15 @@ class Locate_And_Filter_Admin
      */
     public static function saveRootPath()
     {
-        $f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root', 'w');
-        $fpath = realpath(get_home_path()).'/wp'.'-load.php';
+        $f = fopen(plugin_dir_path(dirname(__FILE__)) . '/cache/path2root', 'w');
+        $fpath = realpath(get_home_path()) . '/wp' . '-load.php';
         if (is_file($fpath)) {
             fwrite($f, $fpath);
         } else {
             // some plugin change the normal path, tries some prefixes
             $try_those_prefixes = ['admin', 'private'];
             foreach ($try_those_prefixes as $prefix) {
-                $fpath = realpath(get_home_path())."/$prefix/wp".'-load.php';
+                $fpath = realpath(get_home_path()) . "/$prefix/wp" . '-load.php';
                 if (is_file($fpath)) {
                     fwrite($f, $fpath);
                     break;
@@ -93,7 +95,7 @@ class Locate_And_Filter_Admin
      *
      * @since    1.1.4
      */
-    public function add_mime_types($mime_types)
+    public function addMimeTypes($mime_types)
     {
         $mime_types['kml'] = 'application/vnd.google-earth.kml+xml'; //Adding kml extension
         $mime_types['svg'] = 'image/svg+xml';
@@ -136,7 +138,7 @@ class Locate_And_Filter_Admin
      *
      * @since 1.0.0
      */
-    public function enqueue_scripts()
+    public function enqueueScripts()
     {
         $screen = get_current_screen();
         $allowed_post_types = unserialize(get_option('locate-anything-option-sources'));
@@ -150,41 +152,41 @@ class Locate_And_Filter_Admin
         }
 
         wp_enqueue_media();
-        wp_enqueue_script($this->plugin_name.'-adminjs', plugin_dir_url(__FILE__).'js/locate-and-filter-admin.js');
+        wp_enqueue_script($this->plugin_name . '-adminjs', plugin_dir_url(__FILE__) . 'js/locate-and-filter-admin.js');
         // leaflet JS
-        wp_enqueue_script($this->plugin_name.'-leaflet', plugin_dir_url(__FILE__).'../public/js/leaflet-0.7.3/leaflet.js', [
+        wp_enqueue_script($this->plugin_name . '-leaflet', plugin_dir_url(__FILE__) . '../public/js/leaflet-0.7.3/leaflet.js', [
             'jquery',
         ], $this->version, false);
         // leaflet-filters JS
-        wp_enqueue_script($this->plugin_name.'-leaflet-filters', plugin_dir_url(__FILE__).'../public/js/leaflet-filters/leaflet-filters.js', [
-            $this->plugin_name.'-leaflet',
+        wp_enqueue_script($this->plugin_name . '-leaflet-filters', plugin_dir_url(__FILE__) . '../public/js/leaflet-filters/leaflet-filters.js', [
+            $this->plugin_name . '-leaflet',
         ], $this->version, false);
-        wp_enqueue_script($this->plugin_name.'-googleAPI', 'https://maps.googleapis.com/maps/api/js?key='.$this->getGmapsAPIKey().'&v=3.exp&libraries=places&language=en'.unserialize(get_option('locate-anything-option-map-language')), [
-            $this->plugin_name.'-leaflet-filters',
+        wp_enqueue_script($this->plugin_name . '-googleAPI', 'https://maps.googleapis.com/maps/api/js?key=' . $this->getGmapsAPIKey() . '&v=3.exp&libraries=places&language=en' . unserialize(get_option('locate-anything-option-map-language')), [
+            $this->plugin_name . '-leaflet-filters',
         ], $this->version, false);
-        wp_enqueue_script($this->plugin_name.'-select2', plugin_dir_url(__FILE__).'js/select2_4.0.6-rc.1/js/select2.min.js');
+        wp_enqueue_script($this->plugin_name . '-select2', plugin_dir_url(__FILE__) . 'js/select2_4.0.6-rc.1/js/select2.min.js');
         // Awesome markers
-        wp_enqueue_script($this->plugin_name.'-awesomemarkers', plugin_dir_url(__FILE__).'../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.js', [
-            $this->plugin_name.'-leaflet',
+        wp_enqueue_script($this->plugin_name . '-awesomemarkers', plugin_dir_url(__FILE__) . '../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.js', [
+            $this->plugin_name . '-leaflet',
         ], $this->version, false);
         // annotation plugin
-        wp_enqueue_script($this->plugin_name.'-anno', plugin_dir_url(__FILE__).'js/anno/anno.js', [
+        wp_enqueue_script($this->plugin_name . '-anno', plugin_dir_url(__FILE__) . 'js/anno/anno.js', [
             'jquery',
         ], $this->version, false);
-        wp_enqueue_script($this->plugin_name.'-anno-dependency', plugin_dir_url(__FILE__).'js/anno/scrollintoview/jquery.scrollintoview.min.js', [], $this->version, false);
+        wp_enqueue_script($this->plugin_name . '-anno-dependency', plugin_dir_url(__FILE__) . 'js/anno/scrollintoview/jquery.scrollintoview.min.js', [], $this->version, false);
         // Google Tiles
-        wp_enqueue_script($this->plugin_name.'-googleTiles', plugin_dir_url(__FILE__).'../public/js/leaflet-plugins-master/layer/tile/Google.js', [
-            $this->plugin_name.'-leaflet',
+        wp_enqueue_script($this->plugin_name . '-googleTiles', plugin_dir_url(__FILE__) . '../public/js/leaflet-plugins-master/layer/tile/Google.js', [
+            $this->plugin_name . '-leaflet',
         ], $this->version, false);
         // leaflet markerCluster JS
-        wp_enqueue_script($this->plugin_name.'-leaflet-marker-cluster', plugin_dir_url(__FILE__).'../public/js/leaflet.markercluster/leaflet.markercluster.js', [
+        wp_enqueue_script($this->plugin_name . '-leaflet-marker-cluster', plugin_dir_url(__FILE__) . '../public/js/leaflet.markercluster/leaflet.markercluster.js', [
             'jquery',
         ], $this->version, false);
         // google autocomplete
-        wp_enqueue_script($this->plugin_name.'-googleautojs', plugin_dir_url(__FILE__).'../public/js/leaflet-google-autocomplete/js/leaflet-google-autocomplete.js', [
-            $this->plugin_name.'-googleAPI', ], $this->version, false);
+        wp_enqueue_script($this->plugin_name . '-googleautojs', plugin_dir_url(__FILE__) . '../public/js/leaflet-google-autocomplete/js/leaflet-google-autocomplete.js', [
+            $this->plugin_name . '-googleAPI'], $this->version, false);
         // Edit Area js
-        wp_enqueue_script($this->plugin_name.'-editArea', plugin_dir_url(__FILE__).'../admin/js/edit_area/edit_area_full.js', ['jquery'], $this->version, false);
+        wp_enqueue_script($this->plugin_name . '-editArea', plugin_dir_url(__FILE__) . '../admin/js/edit_area/edit_area_full.js', ['jquery'], $this->version, false);
     }
 
     /**
@@ -192,7 +194,7 @@ class Locate_And_Filter_Admin
      *
      * @since 1.0.0
      */
-    public function enqueue_styles()
+    public function enqueueStyles()
     {
         $screen = get_current_screen();
 
@@ -207,29 +209,29 @@ class Locate_And_Filter_Admin
             return;
         }
 
-        wp_enqueue_style($this->plugin_name.'-admincss', plugin_dir_url(__FILE__).'css/locate-and-filter-admin.css', [], $this->version, 'all');
-        wp_enqueue_style($this->plugin_name.'-annocss', plugin_dir_url(__FILE__).'js/anno/anno.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-admincss', plugin_dir_url(__FILE__) . 'css/locate-and-filter-admin.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-annocss', plugin_dir_url(__FILE__) . 'js/anno/anno.css', [], $this->version, 'all');
 
-        wp_enqueue_style($this->plugin_name.'-select2css', plugin_dir_url(__FILE__).'js/select2_4.0.6-rc.1/css/select2.min.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-select2css', plugin_dir_url(__FILE__) . 'js/select2_4.0.6-rc.1/css/select2.min.css', [], $this->version, 'all');
         // Ionicons
-        wp_enqueue_style($this->plugin_name.'-ioniconscss', 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-ioniconscss', 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', [], $this->version, 'all');
         // Awesome markers
-        wp_enqueue_style($this->plugin_name.'-awesomemarkerscss', plugin_dir_url(__FILE__).'../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-awesomemarkerscss', plugin_dir_url(__FILE__) . '../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.css', [], $this->version, 'all');
         // leaflet css
-        wp_enqueue_style($this->plugin_name.'-leaflet', plugin_dir_url(__FILE__).'../public/js/leaflet-0.7.3/leaflet.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-leaflet', plugin_dir_url(__FILE__) . '../public/js/leaflet-0.7.3/leaflet.css', [], $this->version, 'all');
         // leaflet-filters css
-        wp_enqueue_style($this->plugin_name.'-leaflet-filters', plugin_dir_url(__FILE__).'../public/js/leaflet-filters/leaflet-filters.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-leaflet-filters', plugin_dir_url(__FILE__) . '../public/js/leaflet-filters/leaflet-filters.css', [], $this->version, 'all');
         // leaflet markerCluster css
-        wp_enqueue_style($this->plugin_name.'-leaflet-marker-cluster-default', plugin_dir_url(__FILE__).'../public/js/leaflet.markercluster/MarkerCluster.Default.css', [], $this->version, 'all');
-        wp_enqueue_style($this->plugin_name.'-leaflet-marker-cluster', plugin_dir_url(__FILE__).'../public/js/leaflet.markercluster/MarkerCluster.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-leaflet-marker-cluster-default', plugin_dir_url(__FILE__) . '../public/js/leaflet.markercluster/MarkerCluster.Default.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-leaflet-marker-cluster', plugin_dir_url(__FILE__) . '../public/js/leaflet.markercluster/MarkerCluster.css', [], $this->version, 'all');
         // leaflet Google automplete CSS
-        wp_enqueue_style($this->plugin_name.'-googleauto', plugin_dir_url(__FILE__).'../public/js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', [], $this->version, 'all');
+        wp_enqueue_style($this->plugin_name . '-googleauto', plugin_dir_url(__FILE__) . '../public/js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', [], $this->version, 'all');
     }
 
     /**
      * Adds metaboxes to the post types selected in the options page.
      */
-    public function add_post_meta_boxes()
+    public function addPostMetaBoxes()
     {
         // fetch the post types where LocateAnything will be active
         $selected_post_types = unserialize(get_option('locate-anything-option-sources'));
@@ -244,15 +246,15 @@ class Locate_And_Filter_Admin
 
         foreach ($selected_post_types as $type) {
             add_meta_box('locate-and-filter-class', // Unique ID
-            esc_html__('LocateAndFilter', 'locate-and-filter'), // Title
-            'Locate_And_Filter_Admin::post_class_meta_box', // Callback function
-            $type, // Admin page (or post type)
-            'normal', // Context
-            'high'); // Priority
+                esc_html__('LocateAndFilter', 'locate-and-filter'), // Title
+                'Locate_And_Filter_Admin::post_class_meta_box', // Callback function
+                $type, // Admin page (or post type)
+                'normal', // Context
+                'high'); // Priority
         }
     }
 
-    public function remove_anonymous_object_action($tag, $class, $method, $priority = null)
+    public function removeAnonymousObjectAction($tag, $class, $method, $priority = null)
     {
         if (empty($GLOBALS['wp_filter'][$tag])) {
             return;
@@ -260,14 +262,14 @@ class Locate_And_Filter_Admin
 
         foreach ($GLOBALS['wp_filter'][$tag] as $filterPriority => $filter) {
             /* if( !($priority===null || $priority==$filterPriority) )
-                 continue;*/
+            continue;*/
 
             foreach ($filter as $identifier => $function) {
                 try {
                     if (is_array($function) && !is_a($function['function'], 'Closure')
-                    and is_a($function['function'][0], $class)
-                    and $method === $function['function'][1]
-                ) {
+                        and is_a($function['function'][0], $class)
+                        and $method === $function['function'][1]
+                    ) {
                         remove_action(
                             $tag,
                             [$function['function'][0], $method],
@@ -284,24 +286,24 @@ class Locate_And_Filter_Admin
     /**
      * DEPRECATED : unload all conflicting 3rd party plugin actions before preview.
      */
-    public function clear_hooks_for_preview()
+    public function clearHooksForPreview()
     {
         if (isset($_GET['locateAnything_preview'])) {
             // Lifter LMS
-            Locate_And_Filter_Admin::remove_anonymous_object_action('wp_enqueue_scripts', 'LLMS_Frontend_Assets', 'enqueue_styles');
-            Locate_And_Filter_Admin::remove_anonymous_object_action('wp_enqueue_scripts', 'LLMS_Frontend_Assets', 'enqueue_scripts');
-            Locate_And_Filter_Admin::remove_anonymous_object_action('wp_loaded', 'LLMS_AJAX', 'register_script');
-            Locate_And_Filter_Admin::remove_anonymous_object_action('wp_footer', 'LLMS_Frontend_Assets', 'wp_footer');
+            Locate_And_Filter_Admin::removeAnonymousObjectAction('wp_enqueue_scripts', 'LLMS_Frontend_Assets', 'enqueue_styles');
+            Locate_And_Filter_Admin::removeAnonymousObjectAction('wp_enqueue_scripts', 'LLMS_Frontend_Assets', 'enqueue_scripts');
+            Locate_And_Filter_Admin::removeAnonymousObjectAction('wp_loaded', 'LLMS_AJAX', 'register_script');
+            Locate_And_Filter_Admin::removeAnonymousObjectAction('wp_footer', 'LLMS_Frontend_Assets', 'wp_footer');
         }
     }
 
     /**
      * DEPRECATED : Loads the preview pane.
      */
-    public function load_preview()
+    public function loadPreview()
     {
         if (isset($_GET['locateAnything_preview'])) {
-            include plugin_dir_path(dirname(__FILE__)).'/admin/partials/locate-and-filter-preview.php';
+            include plugin_dir_path(dirname(__FILE__)) . '/admin/partials/locate-and-filter-preview.php';
             exit();
         }
     }
@@ -309,25 +311,25 @@ class Locate_And_Filter_Admin
     /**
      * Adds metaboxes to the post types selected in the options page.
      */
-    public function add_admin_meta_boxes()
+    public function addAdminMetaBoxes()
     {
         add_meta_box('locate-and-filter-class', // Unique ID
-        esc_html__('LocateAndFilter - Wordpress Plugin', 'locate-and-filter'), // Title
-        'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
-        'locateandfiltermap', // Admin page (or post type)
-        'normal', // Context
-        'high'); // Priority
+            esc_html__('LocateAndFilter - Wordpress Plugin', 'locate-and-filter'), // Title
+            'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
+            'locateandfiltermap', // Admin page (or post type)
+            'normal', // Context
+            'high'); // Priority
     }
 
     /**
      * Checks cache permissions, called on action admin_notices.
      */
-    public static function check_cache_permissions()
+    public static function checkCachePermissions()
     {
-        $path = plugin_dir_path(dirname(__FILE__)).'cache';
+        $path = plugin_dir_path(dirname(__FILE__)) . 'cache';
         if (!is_writable($path)) {
             if (!@chmod($path, 0777)) {
-                echo '<div class="update-nag"><p>'.__("<b>Error<b> : Please add write permissions on the following directory : $path", 'locate-and-filter').'</p></div>';
+                echo '<div class="update-nag"><p>' . __("<b>Error<b> : Please add write permissions on the following directory : $path", 'locate-and-filter') . '</p></div>';
             }
         }
     }
@@ -335,34 +337,34 @@ class Locate_And_Filter_Admin
     /**
      * Displays the settings page.
      */
-    public static function admin_settings_page()
+    public static function adminSettingsPage()
     {
-        include plugin_dir_path(__FILE__).'partials/locate-and-filter-settings-admin.php';
+        include plugin_dir_path(__FILE__) . 'partials/locate-and-filter-settings-admin.php';
     }
 
     /**
      * Display the admin meta box.
      */
-    public static function admin_class_meta_box($object, $box)
+    public static function adminClassMetaBox($object, $box)
     {
-        include plugin_dir_path(__FILE__).'partials/locate-and-filter-metabox-admin.php';
+        include plugin_dir_path(__FILE__) . 'partials/locate-and-filter-metabox-admin.php';
     }
 
     /**
      * Display the post meta box.
      */
-    public static function post_class_meta_box($object)
+    public static function postClassMetaBox($object)
     {
-        include plugin_dir_path(__FILE__).'partials/locate-and-filter-metabox-post.php';
+        include plugin_dir_path(__FILE__) . 'partials/locate-and-filter-metabox-post.php';
     }
 
     /**
      * Display the user meta box.
      */
-    public static function user_class_meta_box($object)
+    public static function userClassMetaBox($object)
     {
         $post_type = 'user';
-        include plugin_dir_path(__FILE__).'partials/locate-and-filter-metabox-post.php';
+        include plugin_dir_path(__FILE__) . 'partials/locate-and-filter-metabox-post.php';
     }
 
     /**
@@ -373,7 +375,7 @@ class Locate_And_Filter_Admin
      *
      * @return int post_id
      */
-    public function save_metabox_data($post_id, $post)
+    public function saveMetaboxData($post_id, $post)
     {
         /* Verify the nonce before proceeding. */
         if (!isset($_POST['locate_anything_class_nonce']) || !wp_verify_nonce($_POST['locate_anything_class_nonce'], 'I961JpJQTj0crLKH0mGB')) {
@@ -387,7 +389,7 @@ class Locate_And_Filter_Admin
         }
         foreach ($_POST as $meta_key => $new_meta_value) {
             if (strpos($meta_key, 'locate-anything') !== false) {
-                Locate_And_Filter_Admin::add_update_metas($post_id, $meta_key, $new_meta_value);
+                Locate_And_Filter_Admin::addUpdateMetas($post_id, $meta_key, $new_meta_value);
             }
         }
 
@@ -401,11 +403,11 @@ class Locate_And_Filter_Admin
             $locateanything_custom_field_for_tax_checkbox = get_option('locateanything_custom_field_for_tax_checkbox');
             //end status checkbox
             foreach ($locate_anything_filters as $key => $value) {
-                $enable_icon = get_post_meta($post_id, 'locate-anything-filter-selector-icon-'.$value, true);
+                $enable_icon = get_post_meta($post_id, 'locate-anything-filter-selector-icon-' . $value, true);
                 $locateanything_custom_field_for_tax_elment[$value] = $enable_icon;
 
                 //status checkbox
-                $status = get_post_meta($post_id, 'locate-anything-display-filter-'.$value, true);
+                $status = get_post_meta($post_id, 'locate-anything-display-filter-' . $value, true);
                 if ($status == 'checkbox') {
                     $locateanything_custom_field_for_tax_elment_checkbox[$value] = 'checkbox';
                 } else {
@@ -435,11 +437,11 @@ class Locate_And_Filter_Admin
     /**
      * Save the settings set in Option page.
      */
-    public static function save_options()
+    public static function saveOptions()
     {
         foreach ($_POST as $k => $v) {
             if (strpos($k, 'locate-anything-option-') !== false) {
-                $v = self::locate_anything_sanitaze_option($k, $v);
+                $v = self::locateAnythingSanitazeOption($k, $v);
                 update_option($k, serialize($v), '', 'yes');
             }
         }
@@ -448,7 +450,7 @@ class Locate_And_Filter_Admin
     /**
      * Utilitary function to add, delete, update metas.
      */
-    public function add_update_metas($post_id, $meta_key, $new_meta_value)
+    public function addUpdateMetas($post_id, $meta_key, $new_meta_value)
     {
         /* Get the meta value of the custom field key. */
         $meta_value = get_post_meta($post_id, $meta_key, true);
@@ -470,7 +472,7 @@ class Locate_And_Filter_Admin
     /**
      * creates Admin Page in WP admin menu.
      */
-    public function setup_admin_menu()
+    public function setupAdminMenu()
     {
         add_submenu_page('edit.php?post_type=locateandfiltermap', 'Options', 'Options', 'edit_posts', 'locate-anything-settings', 'Locate_And_Filter_Admin::admin_settings_page');
     }
@@ -481,108 +483,108 @@ class Locate_And_Filter_Admin
     public function createCustomType()
     {
         $labels = [
-            'name'               => __('LocateAndFilter', 'locate-and-filter'),
-            'singular_name'      => __('Map', 'locate-and-filter'),
-            'add_new'            => __('Add New', 'locate-and-filter'),
-            'add_new_item'       => __('Add New Map', 'locate-and-filter'),
-            'edit_item'          => __('Edit Map', 'locate-and-filter'),
-            'new_item'           => __('New Map', 'locate-and-filter'),
-            'all_items'          => __('All Map', 'locate-and-filter'),
-            'view_item'          => __('View Map', 'locate-and-filter'),
-            'search_items'       => __('Search Maps', 'locate-and-filter'),
-            'not_found'          => __('No map found', 'locate-and-filter'),
+            'name' => __('LocateAndFilter', 'locate-and-filter'),
+            'singular_name' => __('Map', 'locate-and-filter'),
+            'add_new' => __('Add New', 'locate-and-filter'),
+            'add_new_item' => __('Add New Map', 'locate-and-filter'),
+            'edit_item' => __('Edit Map', 'locate-and-filter'),
+            'new_item' => __('New Map', 'locate-and-filter'),
+            'all_items' => __('All Map', 'locate-and-filter'),
+            'view_item' => __('View Map', 'locate-and-filter'),
+            'search_items' => __('Search Maps', 'locate-and-filter'),
+            'not_found' => __('No map found', 'locate-and-filter'),
             'not_found_in_trash' => __('No map found in Trash', 'locate-and-filter'),
-            'menu_name'          => __('LocateAndFilter', 'locate-and-filter'),
+            'menu_name' => __('LocateAndFilter', 'locate-and-filter'),
         ];
         $supports = [
             'title',
         ];
         $slug = 'locateandfilterMap';
         $args = [
-            'labels'             => $labels,
-            'public'             => false,
+            'labels' => $labels,
+            'public' => false,
             'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
-            'menu_icon'          => 'dashicons-admin-site',
-            'query_var'          => true,
-            'rewrite'            => [
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'menu_icon' => 'dashicons-admin-site',
+            'query_var' => true,
+            'rewrite' => [
                 'slug' => $slug,
             ],
             'capability_type' => 'post',
-            'has_archive'     => true,
-            'hierarchical'    => false,
-            'menu_position'   => null,
-            'supports'        => $supports,
+            'has_archive' => true,
+            'hierarchical' => false,
+            'menu_position' => null,
+            'supports' => $supports,
         ];
         register_post_type('locateandfilterMap', $args);
         /* marker custom post type*/
 
         $labels = [
-            'name'              => __('Marker Categories', 'locate-and-filter'),
-            'singular_name'     => __('Marker Category', 'locate-and-filter'),
-            'search_items'      => __('Search Categories', 'locate-and-filter'),
-            'all_items'         => __('All Categories', 'locate-and-filter'),
-            'parent_item'       => __('Parent Category', 'locate-and-filter'),
+            'name' => __('Marker Categories', 'locate-and-filter'),
+            'singular_name' => __('Marker Category', 'locate-and-filter'),
+            'search_items' => __('Search Categories', 'locate-and-filter'),
+            'all_items' => __('All Categories', 'locate-and-filter'),
+            'parent_item' => __('Parent Category', 'locate-and-filter'),
             'parent_item_colon' => __('Parent Category:', 'locate-and-filter'),
-            'edit_item'         => __('Edit Category', 'locate-and-filter'),
-            'update_item'       => __('Update Category', 'locate-and-filter'),
-            'add_new_item'      => __('Add New Category', 'locate-and-filter'),
-            'new_item_name'     => __('New Category Name', 'locate-and-filter'),
-            'menu_name'         => __('Categories', 'locate-and-filter'),
+            'edit_item' => __('Edit Category', 'locate-and-filter'),
+            'update_item' => __('Update Category', 'locate-and-filter'),
+            'add_new_item' => __('Add New Category', 'locate-and-filter'),
+            'new_item_name' => __('New Category Name', 'locate-and-filter'),
+            'menu_name' => __('Categories', 'locate-and-filter'),
         ];
 
         $args = [
-            'hierarchical'      => true,
-            'labels'            => $labels,
-            'show_ui'           => true,
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
             'show_admin_column' => true,
-            'query_var'         => true,
-            'rewrite'           => [
+            'query_var' => true,
+            'rewrite' => [
                 'slug' => 'locateanythingmarkercategory',
             ],
         ];
         register_taxonomy('locateanythingmarkercategory', 'locateanythingMarker', $args);
 
         $labels = [
-            'name'              => __('Marker Tags', 'locate-and-filter'),
-            'singular_name'     => __('Marker Tag', 'locate-and-filter'),
-            'search_items'      => __('Search Tags', 'locate-and-filter'),
-            'all_items'         => __('All Tags', 'locate-and-filter'),
-            'parent_item'       => __('Parent Tag', 'locate-and-filter'),
+            'name' => __('Marker Tags', 'locate-and-filter'),
+            'singular_name' => __('Marker Tag', 'locate-and-filter'),
+            'search_items' => __('Search Tags', 'locate-and-filter'),
+            'all_items' => __('All Tags', 'locate-and-filter'),
+            'parent_item' => __('Parent Tag', 'locate-and-filter'),
             'parent_item_colon' => __('Parent Tag:', 'locate-and-filter'),
-            'edit_item'         => __('Edit Tag', 'locate-and-filter'),
-            'update_item'       => __('Update Tag', 'locate-and-filter'),
-            'add_new_item'      => __('Add New Tag', 'locate-and-filter'),
-            'new_item_name'     => __('New Tag Name', 'locate-and-filter'),
-            'menu_name'         => __('Tags', 'locate-and-filter'),
+            'edit_item' => __('Edit Tag', 'locate-and-filter'),
+            'update_item' => __('Update Tag', 'locate-and-filter'),
+            'add_new_item' => __('Add New Tag', 'locate-and-filter'),
+            'new_item_name' => __('New Tag Name', 'locate-and-filter'),
+            'menu_name' => __('Tags', 'locate-and-filter'),
         ];
 
         $args = [
-            'hierarchical'      => false,
-            'labels'            => $labels,
-            'show_ui'           => true,
+            'hierarchical' => false,
+            'labels' => $labels,
+            'show_ui' => true,
             'show_admin_column' => true,
-            'query_var'         => true,
-            'rewrite'           => [
+            'query_var' => true,
+            'rewrite' => [
                 'slug' => 'locateanythingmarkertag',
             ],
         ];
         register_taxonomy('locateanythingmarkertag', 'locateanythingMarker', $args);
 
         $labels = [
-            'name'               => __('Markers', 'locate-and-filter'),
-            'singular_name'      => __('Marker', 'locate-and-filter'),
-            'add_new'            => __('Add New', 'locate-and-filter'),
-            'add_new_item'       => __('Add New Marker', 'locate-and-filter'),
-            'edit_item'          => __('Edit Marker', 'locate-and-filter'),
-            'new_item'           => __('New Marker', 'locate-and-filter'),
-            'all_items'          => __('All Marker', 'locate-and-filter'),
-            'view_item'          => __('View Marker', 'locate-and-filter'),
-            'search_items'       => __('Search Markers', 'locate-and-filter'),
-            'not_found'          => __('No Marker found', 'locate-and-filter'),
+            'name' => __('Markers', 'locate-and-filter'),
+            'singular_name' => __('Marker', 'locate-and-filter'),
+            'add_new' => __('Add New', 'locate-and-filter'),
+            'add_new_item' => __('Add New Marker', 'locate-and-filter'),
+            'edit_item' => __('Edit Marker', 'locate-and-filter'),
+            'new_item' => __('New Marker', 'locate-and-filter'),
+            'all_items' => __('All Marker', 'locate-and-filter'),
+            'view_item' => __('View Marker', 'locate-and-filter'),
+            'search_items' => __('Search Markers', 'locate-and-filter'),
+            'not_found' => __('No Marker found', 'locate-and-filter'),
             'not_found_in_trash' => __('No Marker found in Trash', 'locate-and-filter'),
-            'menu_name'          => __('Markers', 'locate-and-filter'),
+            'menu_name' => __('Markers', 'locate-and-filter'),
         ];
         $supports = [
             'title',
@@ -591,21 +593,21 @@ class Locate_And_Filter_Admin
         ];
         $slug = 'locateanythingMarker';
         $args = [
-            'labels'             => $labels,
-            'public'             => false,
+            'labels' => $labels,
+            'public' => false,
             'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
-            'query_var'          => true,
-            'rewrite'            => [
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'query_var' => true,
+            'rewrite' => [
                 'slug' => $slug,
             ],
             'capability_type' => 'post',
-            'has_archive'     => true,
-            'hierarchical'    => false,
-            'menu_position'   => null,
-            'supports'        => $supports,
-            'taxonomies'      => [
+            'has_archive' => true,
+            'hierarchical' => false,
+            'menu_position' => null,
+            'supports' => $supports,
+            'taxonomies' => [
                 'locateanythingmarkercategory', 'locateanythingmarkertag',
             ],
         ];
@@ -619,7 +621,7 @@ class Locate_And_Filter_Admin
      *
      * @return [type] [description]
      */
-    public static function getAdditional_field_list($post_type = false)
+    public static function getadditionalFieldList($post_type = false)
     {
         $additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
         if ($additional_field_list_json) {
@@ -648,16 +650,17 @@ class Locate_And_Filter_Admin
         $additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
         if ($additional_field_list_json) {
             $additional_field_list = json_decode($additional_field_list_json, true);
-        } ?>
-				<div id="basic_fields_notice">									
-	<?php
-            $post_types = ['basic'=>'basic'];
+        }?>
+
+		<div id="basic_fields_notice">
+        	<?php
+        $post_types = ['basic' => 'basic'];
         $post_types += unserialize(get_option('locate-anything-option-sources'));
         $post_types = apply_filters('locate_anything_add_sources', $post_types);
 
         $already_displayed_tags = [];
 
-        foreach ($post_types as $posttype =>$postTypeName) {
+        foreach ($post_types as $posttype => $postTypeName) {
             if ($postTypeName == 'Users') {
                 $postTypeName = 'user';
             }
@@ -666,34 +669,35 @@ class Locate_And_Filter_Admin
                 if (in_array($tag, $already_displayed_tags)) {
                     continue;
                 }
-                array_push($already_displayed_tags, $tag); ?>
-					<div class='basic-markup basic-markup-<?php echo $postTypeName?>'><b><?php echo ucfirst(str_replace(['|', '_'], ['', ' '], $tag)) ?></b> : <?php echo $tag ?></div>
-				<?php
-            }
-        } ?>
-				
-				</div>
-				<div id="additional_fields_notice">				
-				<table id="additional_fields_notice">							
-				<?php
-        if (is_array($additional_field_list)) {
+                array_push($already_displayed_tags, $tag);?>
+        					<div class='basic-markup basic-markup-<?php echo $postTypeName ?>'><b><?php echo ucfirst(str_replace(['|', '_'], ['', ' '], $tag)) ?></b> : <?php echo $tag ?></div>
+        				<?php
+}
+        }
+        ?>
+
+		</div>
+		<div id="additional_fields_notice">
+    		<table id="additional_fields_notice">
+    			<?php
+if (is_array($additional_field_list)) {
             foreach ($additional_field_list as $field) {
                 if (is_null(@$field['field_description']) || is_null(@$field['field_name']) || @$field['post_type'] !== $post_type) {
                     continue;
-                } ?>
-					<tr class='basic-markup basic-markup-<?php
-            echo $field['post_type']?>'><td><b><?php
-            echo $field['field_description'].'('.$field['post_type'].')' ?></b></td><td>|<?php
-            echo $field['post_type'].'::'.sanitize_key(remove_accents($field['field_description'])) ?>|</td></tr>
-				<?php
-            }
-        } ?>
-				
-				<tfoot id="filter_fields_notice"></tfoot>
-				</table>
-				</div>
-				<?php
-    }
+                }?>
+                    					<tr class='basic-markup basic-markup-<?php
+echo $field['post_type'] ?>'><td><b><?php
+echo $field['field_description'] . '(' . $field['post_type'] . ')' ?></b></td><td>|<?php
+echo $field['post_type'] . '::' . sanitize_key(remove_accents($field['field_description'])) ?>|</td></tr>
+                    				<?php
+}
+        }?>
+
+    			<tfoot id="filter_fields_notice"></tfoot>
+    		</table>
+		</div>
+	<?php
+}
 
     /**
      * Display additional fields form.
@@ -702,27 +706,29 @@ class Locate_And_Filter_Admin
     {
         if (get_post_type($post) == false) {
             return;
-        } ?>
+        }?>
 		<ul id="additional_fields">
-					 <?php
-        $additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
+    		<?php
+$additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
         if ($additional_field_list_json) {
             $additional_field_list = json_decode($additional_field_list_json, true);
         }
         if ($additional_field_list) {
             if (is_array($additional_field_list) && $post !== 'user') {
                 foreach ($additional_field_list as $field) {
-                    if ($field['post_type'] == get_post_type($post)) { ?>
-				  	<li><b><?php
-                    echo $field['field_description'] ?></b><br/> <textarea name="<?php
-                    echo $field['field_name'] ?>"><?php
-                    echo get_post_meta($post->ID, $field['field_name'], true); ?></textarea></li>
-				 <?php
-                }
+                    if ($field['post_type'] == get_post_type($post)) {?>
+        				  	<li><b><?php
+echo $field['field_description'] ?></b><br/> <textarea name="<?php
+echo $field['field_name'] ?>"><?php
+echo get_post_meta($post->ID, $field['field_name'], true); ?></textarea></li>
+    				        <?php
+}
                 }
             }
-        } ?></ul><?php
-    }
+        }?>
+        </ul>
+    <?php
+}
 
     /**
      * returns default templates for new map.
@@ -794,11 +800,11 @@ class Locate_And_Filter_Admin
      */
     public static function getLicence($id)
     {
-        $licences = ['label'=>'-license-lvl1'];
+        $licences = ['label' => '-license-lvl1'];
         $licences = apply_filters('add_seed_licence', $licences);
-        $license_key = unserialize(get_option('locate-anything-option-'.$licences[$id].'-license'));
+        $license_key = unserialize(get_option('locate-anything-option-' . $licences[$id] . '-license'));
 
-        return ['seed'=>$licences[$id], 'key'=>$license_key];
+        return ['seed' => $licences[$id], 'key' => $license_key];
     }
 
     /**
@@ -844,7 +850,7 @@ class Locate_And_Filter_Admin
      * AJAX function : returns JSON encoded array of taxonomies tied to a post type.
      */
     /* get Taxonomies associated with type passed in request */
-    public function LA_getTaxonomies()
+    public function laGettaxonomies()
     {
         echo json_encode(get_object_taxonomies(sanitize_text_field($_REQUEST['type'])));
         exit();
@@ -854,7 +860,7 @@ class Locate_And_Filter_Admin
      * AJAX function : returns JSON encoded array of taxonomies tied to a post type.
      */
     /* get Taxonomies associated with type passed in request */
-    public function LA_getTaxonomies_plus()
+    public function laGettaxonomiesPlus()
     {
         $tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
         array_push($tax, $_REQUEST['type']);
@@ -866,12 +872,12 @@ class Locate_And_Filter_Admin
      * AJAX function : returns JSON encoded array of taxonomies tied to a post type.
      */
     /* get Taxonomies associated with type passed in request */
-    public function LA_getPOST_id()
+    public function laGetpostId()
     {
         $all_post_ids = get_posts([
-            'fields'          => 'ids',
-            'posts_per_page'  => -1,
-            'post_type'       => $_REQUEST['type'],
+            'fields' => 'ids',
+            'posts_per_page' => -1,
+            'post_type' => $_REQUEST['type'],
         ]);
         echo json_encode($all_post_ids);
         exit();
@@ -881,9 +887,9 @@ class Locate_And_Filter_Admin
      * AJAX function : returns JSON encoded array of taxonomies tied to a post type.
      */
     /* get Taxonomy terms associated with type passed in request */
-    public function LA_getTaxonomyTerms()
+    public function laGettaxonomyterms()
     {
-        $selected = get_post_meta(sanitize_text_field($_REQUEST['map_id']), 'locate-anything-allowed-filters-value-'.sanitize_text_field($_REQUEST['type']), true);
+        $selected = get_post_meta(sanitize_text_field($_REQUEST['map_id']), 'locate-anything-allowed-filters-value-' . sanitize_text_field($_REQUEST['type']), true);
         $terms = get_terms(sanitize_text_field($_REQUEST['type']));
         if ($terms) {
             foreach ($terms as $in => $term) {
@@ -908,7 +914,7 @@ class Locate_And_Filter_Admin
     {
         $map_id = sanitize_text_field($_POST['map_id']);
         $layout_id = sanitize_text_field($_POST['layout_id']);
-        $record = get_post_meta(intval($map_id), 'locate-anything-map-template-html-'.$layout_id, true);
+        $record = get_post_meta(intval($map_id), 'locate-anything-map-template-html-' . $layout_id, true);
         if ($record == false) {
             //echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
             echo json_encode(Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url));
@@ -930,7 +936,7 @@ class Locate_And_Filter_Admin
     /**
      *  function : sanitaze options value.
      */
-    private function locate_anything_sanitaze_option($key, $var)
+    private function locateAnythingSanitazeOption($key, $var)
     {
         if (is_array($var)) {
             return array_map('sanitize_text_field', $var);
